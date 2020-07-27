@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks App</title>
+    <!-- BOOTSTRAP CDN LUX !-->
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <!-- FONTS !-->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <!-- MY CSS !-->
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+</head>
+<body>
+
+<main class="container p-4">
+    <h1 class="display-4 text-center title mt-4">Task App</h1>
+
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4 my-auto">
+
+            <div class="card">
+                <div class="card-header">
+                    <form action="/create-task" method="post">
+                        <div class="form-group">
+                            <input type="text" name="content-task" placeholder="Task" class="form-control" autofocus>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for tarea in tareas %}
+                        <li class="list-group-item">
+                           <span class="{% if tarea.done %} done {% endif %}">{{tarea.content}}</span>
+                            <a href="/done/{{tarea.id}}" class="btn btn-success btn-sm">Done</a>
+                            <a href="/delete/{{tarea.id}}" class="btn btn-danger btn-sm">Delete</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>
